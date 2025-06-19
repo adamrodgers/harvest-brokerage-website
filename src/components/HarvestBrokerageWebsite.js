@@ -1,12 +1,55 @@
 "use client";
 
-import React, { useState } from "react";
-import { Menu, X, Phone, Mail, MapPin, ChevronDown, Users, Target, Award, Handshake } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { Menu, X, Phone, Mail, MapPin, ChevronDown, Users, Target, Award, Handshake, Plus, Minus, FlipHorizontal } from "lucide-react";
 import Image from "next/image";
 
 const HarvestBrokerageWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [formStatus, setFormStatus] = useState("");
+  const [expandedService, setExpandedService] = useState(null);
+  const [flippedCard, setFlippedCard] = useState(null);
+  const [counts, setCounts] = useState({ susan: 0, rick: 0, tori: 0 });
+  const hasAnimated = useRef(false);
+
+  // Animated counter effect
+  useEffect(() => {
+    const animateCounters = () => {
+      if (hasAnimated.current) return;
+
+      const susanTarget = 22;
+      const rickTarget = 30;
+      const toriTarget = 10;
+
+      const duration = 2000; // 2 seconds
+      const steps = 60;
+      const stepTime = duration / steps;
+
+      let currentStep = 0;
+
+      const timer = setInterval(() => {
+        currentStep++;
+        const progress = currentStep / steps;
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+
+        setCounts({
+          susan: Math.floor(susanTarget * easeOutQuart),
+          rick: Math.floor(rickTarget * easeOutQuart),
+          tori: Math.floor(toriTarget * easeOutQuart),
+        });
+
+        if (currentStep >= steps) {
+          setCounts({ susan: susanTarget, rick: rickTarget, tori: toriTarget });
+          hasAnimated.current = true;
+          clearInterval(timer);
+        }
+      }, stepTime);
+    };
+
+    // Trigger animation after component mounts
+    const timeout = setTimeout(animateCounters, 500);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,32 +77,71 @@ const HarvestBrokerageWebsite = () => {
     }
   };
 
+  const services = [
+    {
+      title: "Initial Product Presentations",
+      description: "Professional presentations to key decision-makers at retail headquarters and distributor locations, showcasing your products' unique value proposition and market opportunity.",
+      icon: <Target className="text-amber-500" size={24} />,
+    },
+    {
+      title: "Strategic Product Placement",
+      description: "Optimizing product positioning within stores through planogram analysis, category management expertise, and strategic shelf placement negotiations.",
+      icon: <Award className="text-amber-500" size={24} />,
+    },
+    {
+      title: "Ongoing Account Maintenance",
+      description: "Continuous relationship management with retail buyers, ensuring product availability, addressing issues promptly, and maintaining strong partnerships.",
+      icon: <Users className="text-amber-500" size={24} />,
+    },
+    {
+      title: "Promotional Planning & Execution",
+      description: "Comprehensive promotional strategies including trade deals, seasonal campaigns, new product launches, and in-store marketing initiatives.",
+      icon: <Handshake className="text-amber-500" size={24} />,
+    },
+    {
+      title: "Brand Management",
+      description: "Complete brand stewardship including market positioning, competitive analysis, pricing strategy, and brand integrity maintenance across all channels.",
+      icon: <Award className="text-amber-500" size={24} />,
+    },
+    {
+      title: "Retailer & Distributor Relations",
+      description: "Building and maintaining strong relationships with key stakeholders throughout the supply chain, from regional managers to corporate headquarters.",
+      icon: <Handshake className="text-amber-500" size={24} />,
+    },
+  ];
+
   const retailers = ["HEB", "Kroger Texas", "Whole Foods SW", "Central Market", "Albertsons Southern", "Costco Texas", "Brookshire Brothers", "United Supermarkets", "Fiesta Mart", "Tom Thumb"];
 
   const teamMembers = [
     {
       name: "Susan Keinat",
       title: "Co-Owner",
-      experience: "22 years experience",
+      experience: `${counts.susan || 22}+ years experience`,
       description: "Established Harvest Brokerage in March 2003. Specializes in headquarter retailer calls, brand management, and promotional planning.",
-      phone: "(832)) 368-1234",
+      phone: "(832) 368-1234",
       email: "susan@harvestbrokerage.com",
+      achievements: ["Founded Harvest Brokerage", "Former National Sales Manager", "Expert in Brand Management", "Retail Relationship Specialist"],
+      previousRoles: "Account Manager at Gordon Company Houston, Account Executive at CrossMark Inc., Regional Sales Manager at Tony Chachere's Creole Foods",
     },
     {
       name: "Rick Keinat",
       title: "Co-Owner",
-      experience: "30 years experience",
+      experience: `${counts.rick || 30}+ years experience`,
       description: "Joined Harvest Brokerage in April 2010. Expert in distributor relationships and sales execution.",
       phone: "(832) 586-5562",
       email: "rick@harvestbrokerage.com",
+      achievements: ["Distributor Relations Expert", "Sales Execution Specialist", "30+ Years Industry Veteran", "Customer Development Leader"],
+      previousRoles: "Account Manager at Atlanta Foods International, Customer Development Manager at Advantage Sales and Marketing, Regional Sales Manager at Tony Chachere's",
     },
     {
       name: "Tori Clough",
       title: "Senior Account Manager",
-      experience: "10 years experience",
+      experience: `${counts.tori || 10}+ years experience`,
       description: "Team member since 2014, specializing in natural and independent markets with strong retail execution skills.",
       phone: "(832) 690-6707",
       email: "tori@harvestbrokerage.com",
+      achievements: ["Natural Markets Specialist", "Independent Retail Expert", "In-Store Execution Pro", "Rising Industry Leader"],
+      previousRoles: "Sales Representative for Natural and Independent markets, progressive advancement through Account Manager to Senior Account Manager",
     },
   ];
 
@@ -67,20 +149,113 @@ const HarvestBrokerageWebsite = () => {
   const defaultContact = teamMembers.find((member) => member.name === "Tori Clough");
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen bg-stone-50" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <style jsx global>{`
+        @import url("https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
+
+        .heading-font {
+          font-family: "Crimson Text", serif;
+        }
+        .body-font {
+          font-family: "Inter", sans-serif;
+        }
+
+        .nav-link {
+          position: relative;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link::after {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: -4px;
+          left: 50%;
+          background-color: #fbbf24;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+          width: 100%;
+        }
+
+        .team-card {
+          cursor: pointer;
+          height: 400px;
+          position: relative;
+          transition: transform 0.3s ease;
+        }
+
+        .team-card:hover {
+          transform: translateY(-4px);
+        }
+
+        .card-content {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 1rem;
+          transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .card-front {
+          opacity: 1;
+          transform: scale(1);
+          z-index: 2;
+        }
+
+        .card-back {
+          opacity: 0;
+          transform: scale(0.8);
+          z-index: 1;
+        }
+
+        .team-card.is-flipped .card-front {
+          opacity: 0;
+          transform: scale(0.8);
+          z-index: 1;
+        }
+
+        .team-card.is-flipped .card-back {
+          opacity: 1;
+          transform: scale(1);
+          z-index: 2;
+        }
+
+        .section-header {
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-item {
+          transition: all 0.3s ease;
+        }
+
+        .flip-indicator {
+          transition: all 0.3s ease;
+          opacity: 0.7;
+        }
+
+        .flip-indicator:hover {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+      `}</style>
+
       {/* Header */}
       <header className="bg-emerald-900 shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
-              <div className="text-2xl font-bold text-amber-300">Harvest Brokerage</div>
-              <div className="hidden md:block ml-4 text-stone-200 text-sm">Natural & Specialty Trade Specialists</div>
+              <div className="text-2xl font-bold text-amber-300 body-font">Harvest Brokerage</div>
+              <div className="hidden md:block ml-4 text-stone-200 text-sm body-font font-light">Natural & Specialty Trade Specialists</div>
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
               {["Home", "About", "Services", "Markets", "Team", "Contact"].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="text-stone-200 hover:text-amber-300 transition-colors duration-200 font-medium">
+                <a key={item} href={`#${item.toLowerCase()}`} className="nav-link text-stone-200 hover:text-amber-300 font-medium body-font">
                   {item}
                 </a>
               ))}
@@ -113,16 +288,16 @@ const HarvestBrokerageWebsite = () => {
       <section id="home" className="relative bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-700 text-white">
         <div className="relative max-w-8xl mx-auto px-6 sm:px-8 lg:px-12 py-24">
           <div className="text-center">
-            <h1 className="text-5xl md:text-7xl font-serif font-black mb-4 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-xl leading-tight">
+            <h1 className="text-5xl md:text-7xl heading-font font-black mb-4 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-xl leading-tight">
               Harvest Brokerage
             </h1>
             <div className="w-32 h-1 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto mb-6"></div>
-            <h2 className="text-3xl md:text-4xl font-light mb-6 text-stone-100 tracking-wide">
+            <h2 className="text-2xl md:text-3xl body-font font-light mb-6 text-stone-100 tracking-wide">
               <span className="font-semibold text-amber-300 text-shadow-sm">Back to Basics</span>
               <br />
-              <span className="text-stone-300 text-xl md:text-2xl">Food Brokerage</span>
+              <span className="text-stone-300 text-lg md:text-xl">Food Brokerage</span>
             </h2>
-            <p className="text-xl md:text-2xl mb-8 text-stone-200 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl mb-8 text-stone-200 max-w-3xl mx-auto body-font font-light leading-relaxed">
               Texas food broker specializing in natural foods brokerage and specialty trade grocery segments across Texas and surrounding areas
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -141,112 +316,118 @@ const HarvestBrokerageWebsite = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-16 bg-white">
+      <section id="about" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-emerald-900 mb-4">Who We Are</h2>
-            <div className="w-24 h-1 bg-amber-500 mx-auto mb-6"></div>
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-emerald-900 mb-6 body-font section-header">Who We Are</h2>
+            <div className="w-32 h-1 bg-amber-500 mx-auto mb-8"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-lg text-stone-700 mb-6 leading-relaxed">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <p className="text-lg text-stone-700 leading-relaxed body-font">
                 Harvest Brokerage is a leading Texas food broker specializing in natural foods brokerage and the specialty trade grocery segment, offering manufacturers the &quot;back to basics&quot;
                 approach to selling their products.
               </p>
-              <p className="text-lg text-stone-700 mb-6 leading-relaxed">
+              <p className="text-lg text-stone-700 leading-relaxed body-font">
                 As an experienced Texas food broker, we believe in building detail-oriented relationships from a solid foundation with retailers across Texas and surrounding areas. Our natural foods
                 brokerage expertise serves both emerging and established brands.
               </p>
 
-              <div className="grid grid-cols-2 gap-6 mt-8">
+              <div className="grid grid-cols-2 gap-8 pt-8">
                 <div className="text-center">
-                  <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Users className="text-emerald-700" size={28} />
+                  <div className="bg-emerald-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <Users className="text-emerald-700" size={32} />
                   </div>
-                  <h3 className="font-semibold text-emerald-900">22+ Years</h3>
-                  <p className="text-stone-600 text-sm">Industry Experience</p>
+                  <h3 className="font-bold text-emerald-900 heading-font text-xl">22+ Years</h3>
+                  <p className="text-stone-600 text-sm body-font font-medium">Industry Experience</p>
                 </div>
                 <div className="text-center">
-                  <div className="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Target className="text-amber-600" size={28} />
+                  <div className="bg-amber-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <Target className="text-amber-600" size={32} />
                   </div>
-                  <h3 className="font-semibold text-emerald-900">Full Service</h3>
-                  <p className="text-stone-600 text-sm">From Presentation to Promotion</p>
+                  <h3 className="font-bold text-emerald-900 heading-font text-xl">Full Service</h3>
+                  <p className="text-stone-600 text-sm body-font font-medium">From Presentation to Promotion</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-stone-100 p-8 rounded-lg">
-              <h3 className="text-2xl font-bold text-emerald-900 mb-4">Our Services Include</h3>
-              <ul className="space-y-3">
-                {[
-                  "Initial Product Presentations",
-                  "Strategic Product Placement",
-                  "Ongoing Account Maintenance",
-                  "Promotional Planning & Execution",
-                  "Brand Management",
-                  "Retailer & Distributor Relations",
-                ].map((service, index) => (
-                  <li key={index} className="flex items-center">
-                    <div className="w-2 h-2 bg-amber-500 rounded-full mr-3"></div>
-                    <span className="text-stone-700">{service}</span>
-                  </li>
+            <div className="bg-gradient-to-br from-stone-50 to-stone-100 p-10 rounded-2xl shadow-xl">
+              <h3 className="text-3xl font-bold text-emerald-900 mb-8 body-font">Our Services Include</h3>
+              <div className="space-y-4">
+                {services.map((service, index) => (
+                  <div key={index} className="service-item">
+                    <div
+                      className="flex items-center justify-between cursor-pointer p-4 rounded-lg hover:bg-white hover:shadow-md transition-all duration-300"
+                      onClick={() => setExpandedService(expandedService === index ? null : index)}
+                    >
+                      <div className="flex items-center">
+                        <div className="mr-4">{service.icon}</div>
+                        <span className="text-stone-700 font-medium body-font">{service.title}</span>
+                      </div>
+                      <div className="text-amber-500">{expandedService === index ? <Minus size={20} /> : <Plus size={20} />}</div>
+                    </div>
+                    {expandedService === index && (
+                      <div className="px-4 pb-4 pt-2">
+                        <p className="text-stone-600 text-sm leading-relaxed body-font pl-12">{service.description}</p>
+                      </div>
+                    )}
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Market Coverage */}
-      <section id="markets" className="py-16 bg-stone-100">
+      <section id="markets" className="py-20 bg-stone-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-emerald-900 mb-4">Market Coverage</h2>
-            <div className="w-24 h-1 bg-amber-500 mx-auto mb-6"></div>
-            <p className="text-lg text-stone-700 max-w-2xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-emerald-900 mb-6 body-font section-header">Market Coverage</h2>
+            <div className="w-32 h-1 bg-amber-500 mx-auto mb-8"></div>
+            <p className="text-xl text-stone-700 max-w-3xl mx-auto body-font font-light leading-relaxed">
               Texas food broker serving major retailers and distributors across Texas, including Houston, Dallas, Austin, San Antonio, and surrounding areas
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-emerald-900 mb-4 flex items-center">
-                <Award className="mr-2 text-amber-500" size={24} />
+          <div className="grid md:grid-cols-3 gap-10">
+            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <h3 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center body-font">
+                <Award className="mr-3 text-amber-500" size={28} />
                 Major Retailers
               </h3>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-3">
                 {retailers.slice(0, 8).map((retailer, index) => (
-                  <div key={index} className="text-stone-700 text-sm py-1">
+                  <div key={index} className="text-stone-700 text-sm py-2 px-3 bg-stone-50 rounded-lg body-font font-medium">
                     {retailer}
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-emerald-900 mb-4 flex items-center">
-                <Handshake className="mr-2 text-amber-500" size={24} />
+            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <h3 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center body-font">
+                <Handshake className="mr-3 text-amber-500" size={28} />
                 Distributors
               </h3>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {["KeHE Distributors", "UNFI Distributors", "Chefs' Warehouse", "Jakes Finer Foods", "Grocers Supply / C&S"].map((distributor, index) => (
-                  <div key={index} className="text-stone-700 text-sm py-1">
+                  <div key={index} className="text-stone-700 text-sm py-2 px-3 bg-stone-50 rounded-lg body-font font-medium">
                     {distributor}
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold text-emerald-900 mb-4 flex items-center">
-                <Target className="mr-2 text-amber-500" size={24} />
+            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+              <h3 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center body-font">
+                <Target className="mr-3 text-amber-500" size={28} />
                 Independents
               </h3>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {["KeHE Independents", "UNFI Independents", "Rouses Supermarkets", "Akins and Chamberlins"].map((independent, index) => (
-                  <div key={index} className="text-stone-700 text-sm py-1">
+                  <div key={index} className="text-stone-700 text-sm py-2 px-3 bg-stone-50 rounded-lg body-font font-medium">
                     {independent}
                   </div>
                 ))}
@@ -257,129 +438,178 @@ const HarvestBrokerageWebsite = () => {
       </section>
 
       {/* Team Section */}
-      <section id="team" className="py-16 bg-white">
+      <section id="team" className="py-20 bg-white relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-emerald-900 mb-4">Our Team</h2>
-            <div className="w-24 h-1 bg-amber-500 mx-auto mb-6"></div>
-            <p className="text-lg text-stone-700 max-w-2xl mx-auto">Experienced professionals dedicated to building lasting partnerships</p>
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-emerald-900 mb-6 body-font section-header">Our Team</h2>
+            <div className="w-32 h-1 bg-amber-500 mx-auto mb-8"></div>
+            <p className="text-xl text-stone-700 max-w-3xl mx-auto body-font font-light leading-relaxed">Experienced professionals dedicated to building lasting partnerships</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
-              <div key={index} className="bg-stone-100 p-6 rounded-lg text-center">
-                {member.name === "Susan Keinat" && (
-                  <div className="w-24 h-24 bg-emerald-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <Users className="text-emerald-700" size={32} />
-                  </div>
-                )}
-                {member.name === "Rick Keinat" && (
-                  <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden relative">
-                    <Image src="/rick.jpeg" alt="Rick Keinat" fill className="object-cover" sizes="96px" />
-                  </div>
-                )}
-                {member.name === "Tori Clough" && (
-                  <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden relative">
-                    <Image src="/tori.png" alt="Tori Clough" fill className="object-cover" sizes="96px" />
-                  </div>
-                )}
-                <h3 className="text-xl font-bold text-emerald-900 mb-2">{member.name}</h3>
-                <p className="text-amber-600 font-semibold mb-2">{member.title}</p>
-                <p className="text-sm text-stone-600 mb-3">{member.experience}</p>
-                <p className="text-stone-700 text-sm leading-relaxed mb-4">{member.description}</p>
+          <div className="grid md:grid-cols-3 gap-10 mb-16">
+            {teamMembers.map((member, index) => {
+              const isFlipped = flippedCard === index;
 
-                {/* Contact Information */}
-                <div className="space-y-2 pt-4 border-t border-stone-300">
-                  <div className="flex items-center justify-center text-sm text-stone-600">
-                    <Phone className="text-amber-500 mr-2" size={16} />
-                    <span>{member.phone}</span>
+              return (
+                <div
+                  key={index}
+                  className={`team-card ${isFlipped ? "is-flipped" : ""}`}
+                  onClick={() => {
+                    setFlippedCard(flippedCard === index ? null : index);
+                  }}
+                >
+                  {/* Card Front */}
+                  <div className="card-content card-front bg-gradient-to-br from-stone-50 to-stone-100 shadow-xl">
+                    <div className="p-6 flex flex-col items-center h-full">
+                      {member.name === "Susan Keinat" && (
+                        <div className="w-20 h-20 bg-emerald-200 rounded-full mb-4 flex items-center justify-center shadow-lg">
+                          <Users className="text-emerald-700" size={28} />
+                        </div>
+                      )}
+                      {member.name === "Rick Keinat" && (
+                        <div className="w-20 h-20 rounded-full mb-4 overflow-hidden relative shadow-lg">
+                          <Image src="/rick.jpeg" alt="Rick Keinat" fill className="object-cover" sizes="80px" />
+                        </div>
+                      )}
+                      {member.name === "Tori Clough" && (
+                        <div className="w-20 h-20 rounded-full mb-4 overflow-hidden relative shadow-lg">
+                          <Image src="/tori.png" alt="Tori Clough" fill className="object-cover" sizes="80px" />
+                        </div>
+                      )}
+
+                      <div className="text-center flex-1 flex flex-col justify-between">
+                        <div>
+                          <h3 className="text-xl font-bold text-emerald-900 mb-2 body-font">{member.name}</h3>
+                          <p className="text-amber-600 font-bold mb-2 body-font">{member.title}</p>
+                          <p className="text-sm text-stone-600 mb-3 body-font font-medium">{member.experience}</p>
+                          <p className="text-stone-700 text-sm leading-relaxed body-font">{member.description}</p>
+                        </div>
+
+                        <div className="mt-4 pt-4 border-t border-stone-300 mb-6">
+                          <div className="flex items-center justify-center text-xs text-stone-600 body-font mb-2">
+                            <Phone className="text-amber-500 mr-2" size={14} />
+                            <span>{member.phone}</span>
+                          </div>
+                          <div className="flex items-center justify-center text-xs text-stone-600 body-font">
+                            <Mail className="text-amber-500 mr-2" size={14} />
+                            <span>{member.email}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="absolute bottom-3 right-3 flip-indicator">
+                        <FlipHorizontal size={16} className="text-amber-500" />
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-center text-sm text-stone-600">
-                    <Mail className="text-amber-500 mr-2" size={16} />
-                    <span>{member.email}</span>
+
+                  {/* Card Back */}
+                  <div className="card-content card-back bg-gradient-to-br from-emerald-900 to-emerald-800 shadow-xl text-white">
+                    <div className="p-6 flex flex-col h-full">
+                      <h3 className="text-xl font-bold mb-4 body-font text-amber-300 text-center">{member.name}</h3>
+
+                      <div className="mb-6 flex-1">
+                        <h4 className="text-sm font-semibold mb-2 text-amber-200 body-font">Key Achievements</h4>
+                        <ul className="space-y-1 mb-4">
+                          {member.achievements.map((achievement, idx) => (
+                            <li key={idx} className="flex items-start text-xs body-font">
+                              <div className="w-1 h-1 bg-amber-400 rounded-full mr-2 flex-shrink-0 mt-1.5"></div>
+                              <span>{achievement}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        <h4 className="text-sm font-semibold mb-2 text-amber-200 body-font">Previous Experience</h4>
+                        <p className="text-xs leading-relaxed body-font text-stone-200">{member.previousRoles}</p>
+                      </div>
+
+                      <div className="absolute bottom-3 right-3 flip-indicator">
+                        <FlipHorizontal size={16} className="text-amber-300" />
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 bg-emerald-900 text-white">
+      <section id="contact" className="py-20 bg-emerald-900 text-white relative z-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Get In Touch</h2>
-            <div className="w-24 h-1 bg-amber-500 mx-auto mb-6"></div>
-            <p className="text-lg text-stone-200 max-w-2xl mx-auto">Ready to build a solid foundation for your products? Let&apos;s discuss how we can help.</p>
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-6 body-font section-header">Get In Touch</h2>
+            <div className="w-32 h-1 bg-amber-500 mx-auto mb-8"></div>
+            <p className="text-xl text-stone-200 max-w-3xl mx-auto body-font font-light leading-relaxed">Ready to build a solid foundation for your products? Let&apos;s discuss how we can help.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-16">
             <div>
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-              <div className="space-y-4">
+              <h3 className="text-3xl font-bold mb-8 body-font">Contact Information</h3>
+              <div className="space-y-6">
                 <div className="flex items-center">
-                  <Phone className="text-amber-300 mr-4" size={24} />
+                  <Phone className="text-amber-300 mr-6" size={28} />
                   <div>
-                    <p className="font-semibold">Phone</p>
-                    <p className="text-stone-200">{defaultContact?.phone}</p>
+                    <p className="font-bold text-lg body-font">Phone</p>
+                    <p className="text-stone-200 body-font">{defaultContact?.phone}</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Mail className="text-amber-300 mr-4" size={24} />
+                  <Mail className="text-amber-300 mr-6" size={28} />
                   <div>
-                    <p className="font-semibold">Email</p>
-                    <p className="text-stone-200">{defaultContact?.email}</p>
+                    <p className="font-bold text-lg body-font">Email</p>
+                    <p className="text-stone-200 body-font">{defaultContact?.email}</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <MapPin className="text-amber-300 mr-4" size={24} />
+                  <MapPin className="text-amber-300 mr-6" size={28} />
                   <div>
-                    <p className="font-semibold">Service Area</p>
-                    <p className="text-stone-200">Texas & Surrounding Areas</p>
+                    <p className="font-bold text-lg body-font">Service Area</p>
+                    <p className="text-stone-200 body-font">Texas & Surrounding Areas</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <section className="bg-white bg-opacity-10 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold mb-6 text-emerald-900">Send us a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
+            <section className="bg-white bg-opacity-10 p-8 rounded-2xl shadow-2xl backdrop-blur-sm">
+              <h3 className="text-3xl font-bold mb-8 text-emerald-900 body-font">Send us a Message</h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <input
                   type="text"
                   name="name"
                   placeholder="Your Name"
                   required
-                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-stone-100 border border-stone-300 focus:border-amber-300 focus:outline-none focus:bg-white focus:bg-opacity-30 focus:text-emerald-900"
+                  className="w-full p-4 rounded-xl bg-white bg-opacity-90 placeholder-stone-500 text-stone-900 border border-stone-300 focus:border-amber-300 focus:outline-none focus:bg-white body-font transition-all duration-300"
                 />
                 <input
                   type="email"
                   name="email"
                   placeholder="Your Email"
                   required
-                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-stone-100 border border-stone-300 focus:border-amber-300 focus:outline-none focus:bg-white focus:bg-opacity-30 focus:text-emerald-900"
+                  className="w-full p-4 rounded-xl bg-white bg-opacity-90 placeholder-stone-500 text-stone-900 border border-stone-300 focus:border-amber-300 focus:outline-none focus:bg-white body-font transition-all duration-300"
                 />
                 <input
                   type="text"
                   name="company"
                   placeholder="Company Name"
-                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-stone-100 border border-stone-300 focus:border-amber-300 focus:outline-none focus:bg-white focus:bg-opacity-30 focus:text-emerald-900"
+                  className="w-full p-4 rounded-xl bg-white bg-opacity-90 placeholder-stone-500 text-stone-900 border border-stone-300 focus:border-amber-300 focus:outline-none focus:bg-white body-font transition-all duration-300"
                 />
                 <textarea
                   name="message"
                   rows={4}
                   placeholder="Your Message"
                   required
-                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-stone-100 border border-stone-300 focus:outline-none resize-none focus:border-amber-300 focus:bg-white focus:bg-opacity-30 focus:text-emerald-900"
+                  className="w-full p-4 rounded-xl bg-white bg-opacity-90 placeholder-stone-500 text-stone-900 border border-stone-300 focus:outline-none resize-none focus:border-amber-300 focus:bg-white body-font transition-all duration-300"
                 />
                 <button
                   type="submit"
                   disabled={formStatus === "Sending..."}
-                  className="w-full bg-amber-500 hover:bg-amber-600 text-emerald-900 font-bold py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50"
+                  className="w-full bg-amber-500 hover:bg-amber-600 text-emerald-900 font-bold py-4 px-8 rounded-xl transition-all duration-300 disabled:opacity-50 body-font text-lg shadow-lg hover:shadow-xl"
                 >
                   {formStatus === "Sending..." ? "Sending..." : "Send Message"}
                 </button>
-                {formStatus && formStatus !== "Sending..." && <p className={`text-center ${formStatus.includes("Thank you") ? "text-green-300" : "text-red-300"}`}>{formStatus}</p>}
+                {formStatus && formStatus !== "Sending..." && <p className={`text-center body-font ${formStatus.includes("Thank you") ? "text-green-300" : "text-red-300"}`}>{formStatus}</p>}
               </form>
             </section>
           </div>
@@ -387,12 +617,12 @@ const HarvestBrokerageWebsite = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-emerald-950 text-stone-200 py-8">
+      <footer className="bg-emerald-950 text-stone-200 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="text-2xl font-bold text-amber-300 mb-2">Harvest Brokerage</div>
-            <p className="mb-4">Natural & Specialty Trade Specialists</p>
-            <p className="text-sm text-stone-400">© 2025 Harvest Brokerage. All rights reserved.</p>
+            <div className="text-3xl font-bold text-amber-300 mb-3 body-font">Harvest Brokerage</div>
+            <p className="mb-6 body-font text-lg font-light">Natural & Specialty Trade Specialists</p>
+            <p className="text-sm text-stone-400 body-font">© 2025 Harvest Brokerage. All rights reserved.</p>
           </div>
         </div>
       </footer>
