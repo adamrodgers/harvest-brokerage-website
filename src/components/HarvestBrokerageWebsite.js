@@ -42,20 +42,29 @@ const HarvestBrokerageWebsite = () => {
       title: "Co-Owner",
       experience: "22 years experience",
       description: "Established Harvest Brokerage in March 2003. Specializes in headquarter retailer calls, brand management, and promotional planning.",
+      phone: "(832)) 368-1234",
+      email: "susan@harvestbrokerage.com",
     },
     {
       name: "Rick Keinat",
       title: "Co-Owner",
       experience: "30 years experience",
       description: "Joined Harvest Brokerage in April 2010. Expert in distributor relationships and sales execution.",
+      phone: "(832) 586-5562",
+      email: "rick@harvestbrokerage.com",
     },
     {
       name: "Tori Clough",
       title: "Senior Account Manager",
       experience: "10 years experience",
       description: "Team member since 2014, specializing in natural and independent markets with strong retail execution skills.",
+      phone: "(832) 690-6707",
+      email: "tori@harvestbrokerage.com",
     },
   ];
+
+  // Get Tori's contact info for default contact section
+  const defaultContact = teamMembers.find((member) => member.name === "Tori Clough");
 
   return (
     <div className="min-h-screen bg-stone-50">
@@ -108,10 +117,10 @@ const HarvestBrokerageWebsite = () => {
               Harvest Brokerage
             </h1>
             <div className="w-32 h-1 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto mb-6"></div>
-            <h2 className="text-2xl md:text-3xl font-light mb-6 text-stone-100 tracking-wide">
+            <h2 className="text-3xl md:text-4xl font-light mb-6 text-stone-100 tracking-wide">
               <span className="font-semibold text-amber-300 text-shadow-sm">Back to Basics</span>
               <br />
-              <span className="text-stone-300">Food Brokerage</span>
+              <span className="text-stone-300 text-xl md:text-2xl">Food Brokerage</span>
             </h2>
             <p className="text-xl md:text-2xl mb-8 text-stone-200 max-w-3xl mx-auto">
               Texas food broker specializing in natural foods brokerage and specialty trade grocery segments across Texas and surrounding areas
@@ -236,7 +245,7 @@ const HarvestBrokerageWebsite = () => {
                 Independents
               </h3>
               <div className="space-y-2">
-                {["KeHE Independents", "UNFI Independents", "Rice Epicurean Market", "Rouses Supermarkets", "Akins and Chamberlins"].map((independent, index) => (
+                {["KeHE Independents", "UNFI Independents", "Rouses Supermarkets", "Akins and Chamberlins"].map((independent, index) => (
                   <div key={index} className="text-stone-700 text-sm py-1">
                     {independent}
                   </div>
@@ -277,7 +286,19 @@ const HarvestBrokerageWebsite = () => {
                 <h3 className="text-xl font-bold text-emerald-900 mb-2">{member.name}</h3>
                 <p className="text-amber-600 font-semibold mb-2">{member.title}</p>
                 <p className="text-sm text-stone-600 mb-3">{member.experience}</p>
-                <p className="text-stone-700 text-sm leading-relaxed">{member.description}</p>
+                <p className="text-stone-700 text-sm leading-relaxed mb-4">{member.description}</p>
+
+                {/* Contact Information */}
+                <div className="space-y-2 pt-4 border-t border-stone-300">
+                  <div className="flex items-center justify-center text-sm text-stone-600">
+                    <Phone className="text-amber-500 mr-2" size={16} />
+                    <span>{member.phone}</span>
+                  </div>
+                  <div className="flex items-center justify-center text-sm text-stone-600">
+                    <Mail className="text-amber-500 mr-2" size={16} />
+                    <span>{member.email}</span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -301,14 +322,14 @@ const HarvestBrokerageWebsite = () => {
                   <Phone className="text-amber-300 mr-4" size={24} />
                   <div>
                     <p className="font-semibold">Phone</p>
-                    <p className="text-stone-200">(555) 123-4567</p>
+                    <p className="text-stone-200">{defaultContact?.phone}</p>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <Mail className="text-amber-300 mr-4" size={24} />
                   <div>
                     <p className="font-semibold">Email</p>
-                    <p className="text-stone-200">info@harvestbrokerage.com</p>
+                    <p className="text-stone-200">{defaultContact?.email}</p>
                   </div>
                 </div>
                 <div className="flex items-center">
@@ -322,7 +343,7 @@ const HarvestBrokerageWebsite = () => {
             </div>
 
             <section className="bg-white bg-opacity-10 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
+              <h3 className="text-2xl font-bold mb-6 text-emerald-900">Send us a Message</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                   type="text"
