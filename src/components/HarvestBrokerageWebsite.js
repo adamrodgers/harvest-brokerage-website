@@ -121,7 +121,7 @@ const HarvestBrokerageWebsite = () => {
       phone: "(832) 368-1234",
       email: "susan@harvestbrokerage.com",
       achievements: ["Founded Harvest Brokerage", "Former National Sales Manager", "Expert in Brand Management", "Retail Relationship Specialist"],
-      previousRoles: "Account Manager at Gordon Company Houston, Account Executive at CrossMark Inc., Regional Sales Manager at Tony Chachere's Creole Foods",
+      previousRoles: ["Account Manager at Gordon Company Houston", "Account Executive at CrossMark Inc.", "Regional Sales Manager at Tony Chachere's Creole Foods"],
     },
     {
       name: "Rick Keinat",
@@ -131,17 +131,17 @@ const HarvestBrokerageWebsite = () => {
       phone: "(832) 586-5562",
       email: "rick@harvestbrokerage.com",
       achievements: ["Distributor Relations Expert", "Sales Execution Specialist", "30+ Years Industry Veteran", "Customer Development Leader"],
-      previousRoles: "Account Manager at Atlanta Foods International, Customer Development Manager at Advantage Sales and Marketing, Regional Sales Manager at Tony Chachere's",
+      previousRoles: ["Account Manager at Atlanta Foods International", "Customer Development Manager at Advantage Sales and Marketing", "Regional Sales Manager at Tony Chachere's"],
     },
     {
       name: "Tori Clough",
       title: "Senior Account Manager",
       experience: `${counts.tori || 10}+ years experience`,
       description: "Team member since 2014, specializing in natural and independent markets with strong retail execution skills.",
-      phone: "(832) 690-6707",
+      phone: "(281) 690-6707",
       email: "tori@harvestbrokerage.com",
       achievements: ["Natural Markets Specialist", "Independent Retail Expert", "In-Store Execution Pro", "Rising Industry Leader"],
-      previousRoles: "Sales Representative for Natural and Independent markets, progressive advancement through Account Manager to Senior Account Manager",
+      previousRoles: ["Sales Representative for Natural and Independent markets", "Progressive advancement through Account Manager to Senior Account Manager"],
     },
   ];
 
@@ -520,7 +520,14 @@ const HarvestBrokerageWebsite = () => {
                         </ul>
 
                         <h4 className="text-sm font-semibold mb-2 text-amber-200 body-font">Previous Experience</h4>
-                        <p className="text-xs leading-relaxed body-font text-stone-200">{member.previousRoles}</p>
+                        <ul className="space-y-1">
+                          {member.previousRoles.map((role, idx) => (
+                            <li key={idx} className="flex items-start text-xs body-font text-stone-200">
+                              <div className="w-1 h-1 bg-amber-400 rounded-full mr-2 flex-shrink-0 mt-1.5"></div>
+                              <span>{role}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
 
                       <div className="absolute bottom-3 right-3 flip-indicator">
