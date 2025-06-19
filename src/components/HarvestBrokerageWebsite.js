@@ -6,6 +6,33 @@ import Image from "next/image";
 
 const HarvestBrokerageWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [formStatus, setFormStatus] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus("Sending...");
+
+    const formData = new FormData(e.target);
+
+    try {
+      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setFormStatus("Thank you! Your message has been sent.");
+        e.target.reset();
+      } else {
+        setFormStatus("Oops! There was a problem submitting your form");
+      }
+    } catch (error) {
+      setFormStatus("Oops! There was a problem submitting your form");
+    }
+  };
 
   const retailers = ["HEB", "Kroger Texas", "Whole Foods SW", "Central Market", "Albertsons Southern", "Costco Texas", "Brookshire Brothers", "United Supermarkets", "Fiesta Mart", "Tom Thumb"];
 
@@ -86,10 +113,19 @@ const HarvestBrokerageWebsite = () => {
               <br />
               <span className="text-stone-300">Food Brokerage</span>
             </h2>
-            <p className="text-xl md:text-2xl mb-8 text-stone-200 max-w-3xl mx-auto">Specializing in Natural and Specialty Trade grocery segments across Texas and surrounding areas</p>
+            <p className="text-xl md:text-2xl mb-8 text-stone-200 max-w-3xl mx-auto">
+              Texas food broker specializing in natural foods brokerage and specialty trade grocery segments across Texas and surrounding areas
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-amber-500 hover:bg-amber-600 text-emerald-900 font-bold py-3 px-8 rounded-lg transition-colors duration-200">Our Services</button>
-              <button className="border-2 border-amber-300 text-amber-300 hover:bg-amber-300 hover:text-emerald-900 font-bold py-3 px-8 rounded-lg transition-colors duration-200">Contact Us</button>
+              <a href="#about" className="bg-amber-500 hover:bg-amber-600 text-emerald-900 font-bold py-3 px-8 rounded-lg transition-colors duration-200 text-center">
+                Our Services
+              </a>
+              <a
+                href="#contact"
+                className="border-2 border-amber-300 text-amber-300 hover:bg-amber-300 hover:text-emerald-900 font-bold py-3 px-8 rounded-lg transition-colors duration-200 text-center"
+              >
+                Contact Us
+              </a>
             </div>
           </div>
         </div>
@@ -106,10 +142,12 @@ const HarvestBrokerageWebsite = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-lg text-stone-700 mb-6 leading-relaxed">
-                Harvest Brokerage specializes in the Natural and Specialty Trade grocery segment, offering manufacturers the &quot;back to basics&quot; way of selling their products.
+                Harvest Brokerage is a leading Texas food broker specializing in natural foods brokerage and the specialty trade grocery segment, offering manufacturers the &quot;back to basics&quot;
+                approach to selling their products.
               </p>
               <p className="text-lg text-stone-700 mb-6 leading-relaxed">
-                We believe in offering a detail-oriented relationship built from a solid foundation with retailers in Texas and surrounding areas.
+                As an experienced Texas food broker, we believe in building detail-oriented relationships from a solid foundation with retailers across Texas and surrounding areas. Our natural foods
+                brokerage expertise serves both emerging and established brands.
               </p>
 
               <div className="grid grid-cols-2 gap-6 mt-8">
@@ -158,7 +196,9 @@ const HarvestBrokerageWebsite = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-emerald-900 mb-4">Market Coverage</h2>
             <div className="w-24 h-1 bg-amber-500 mx-auto mb-6"></div>
-            <p className="text-lg text-stone-700 max-w-2xl mx-auto">We service major retailers and distributors across Texas and surrounding areas</p>
+            <p className="text-lg text-stone-700 max-w-2xl mx-auto">
+              Texas food broker serving major retailers and distributors across Texas, including Houston, Dallas, Austin, San Antonio, and surrounding areas
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -283,35 +323,43 @@ const HarvestBrokerageWebsite = () => {
 
             <section className="bg-white bg-opacity-10 p-6 rounded-lg">
               <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
-              <div className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                   type="text"
+                  name="name"
                   placeholder="Your Name"
-                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-white border border-stone-300 focus:border-amber-300 focus:outline-none"
+                  required
+                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-stone-100 border border-stone-300 focus:border-amber-300 focus:outline-none focus:bg-white focus:bg-opacity-30 focus:text-emerald-900"
                 />
                 <input
                   type="email"
+                  name="email"
                   placeholder="Your Email"
-                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-white border border-stone-300 focus:border-amber-300 focus:outline-none"
+                  required
+                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-stone-100 border border-stone-300 focus:border-amber-300 focus:outline-none focus:bg-white focus:bg-opacity-30 focus:text-emerald-900"
                 />
                 <input
                   type="text"
+                  name="company"
                   placeholder="Company Name"
-                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-white border border-stone-300 focus:border-amber-300 focus:outline-none"
+                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-stone-100 border border-stone-300 focus:border-amber-300 focus:outline-none focus:bg-white focus:bg-opacity-30 focus:text-emerald-900"
                 />
                 <textarea
+                  name="message"
                   rows={4}
                   placeholder="Your Message"
-                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-white border border-stone-300 focus:outline-none resize-none"
+                  required
+                  className="w-full p-3 rounded-lg bg-white bg-opacity-20 placeholder-stone-300 text-stone-100 border border-stone-300 focus:outline-none resize-none focus:border-amber-300 focus:bg-white focus:bg-opacity-30 focus:text-emerald-900"
                 />
                 <button
-                  type="button"
-                  className="w-full bg-amber-500 hover:bg-amber-600 text-emerald-900 font-bold py-3 px-6 rounded-lg transition-colors duration-200"
-                  onClick={() => alert("Contact form would submit here")}
+                  type="submit"
+                  disabled={formStatus === "Sending..."}
+                  className="w-full bg-amber-500 hover:bg-amber-600 text-emerald-900 font-bold py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50"
                 >
-                  Send Message
+                  {formStatus === "Sending..." ? "Sending..." : "Send Message"}
                 </button>
-              </div>
+                {formStatus && formStatus !== "Sending..." && <p className={`text-center ${formStatus.includes("Thank you") ? "text-green-300" : "text-red-300"}`}>{formStatus}</p>}
+              </form>
             </section>
           </div>
         </div>
