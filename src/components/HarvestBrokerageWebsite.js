@@ -118,7 +118,7 @@ const HarvestBrokerageWebsite = () => {
       title: "Co-Owner",
       experience: `${counts.susan || 22}+ years experience`,
       description: "Established Harvest Brokerage in March 2003. Specializes in headquarter retailer calls, brand management, and promotional planning.",
-      phone: "(832) 368-1234",
+      phone: "(832)) 368-1234",
       email: "susan@harvestbrokerage.com",
       achievements: ["Founded Harvest Brokerage", "Former National Sales Manager", "Expert in Brand Management", "Retail Relationship Specialist"],
       previousRoles: ["Account Manager at Gordon Company Houston", "Account Executive at CrossMark Inc.", "Regional Sales Manager at Tony Chachere's Creole Foods"],
@@ -138,7 +138,7 @@ const HarvestBrokerageWebsite = () => {
       title: "Senior Account Manager",
       experience: `${counts.tori || 10}+ years experience`,
       description: "Team member since 2014, specializing in natural and independent markets with strong retail execution skills.",
-      phone: "(281) 690-6707",
+      phone: "(832) 690-6707",
       email: "tori@harvestbrokerage.com",
       achievements: ["Natural Markets Specialist", "Independent Retail Expert", "In-Store Execution Pro", "Rising Industry Leader"],
       previousRoles: ["Sales Representative for Natural and Independent markets", "Progressive advancement through Account Manager to Senior Account Manager"],
@@ -287,20 +287,31 @@ const HarvestBrokerageWebsite = () => {
       {/* Hero Section */}
       <section id="home" className="relative bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-700 text-white">
         <div className="relative max-w-8xl mx-auto px-6 sm:px-8 lg:px-12 py-24">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-7xl heading-font font-black mb-4 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-xl leading-tight">
+          <div className="text-center relative">
+            <div className="absolute inset-0 flex items-start justify-center pointer-events-none">
+              <Image
+                src="/wheat.svg"
+                alt=""
+                width={320}
+                height={240}
+                className="opacity-20 absolute -mt-20"
+                style={{ filter: "brightness(0) saturate(100%) invert(17%) sepia(18%) saturate(1804%) hue-rotate(127deg) brightness(95%) contrast(96%)" }}
+              />
+            </div>
+
+            <h1 className="text-5xl md:text-7xl heading-font font-black mb-4 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-xl leading-tight relative z-10">
               Harvest Brokerage
             </h1>
             <div className="w-32 h-1 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto mb-6"></div>
-            <h2 className="text-2xl md:text-3xl body-font font-light mb-6 text-stone-100 tracking-wide">
+            <h2 className="text-2xl md:text-3xl body-font font-light mb-6 text-stone-100 tracking-wide relative z-10">
               <span className="font-semibold text-amber-300 text-shadow-sm">Back to Basics</span>
               <br />
               <span className="text-stone-300 text-lg md:text-xl">Food Brokerage</span>
             </h2>
-            <p className="text-xl md:text-2xl mb-8 text-stone-200 max-w-3xl mx-auto body-font font-light leading-relaxed">
+            <p className="text-xl md:text-2xl mb-8 text-stone-200 max-w-3xl mx-auto body-font font-light leading-relaxed relative z-10">
               Texas food broker specializing in natural foods brokerage and specialty trade grocery segments across Texas and surrounding areas
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
               <a href="#about" className="bg-amber-500 hover:bg-amber-600 text-emerald-900 font-bold py-3 px-8 rounded-lg transition-colors duration-200 text-center">
                 Our Services
               </a>
