@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Menu, X, Phone, Mail, MapPin, ChevronDown, Users, Target, Award, Handshake, Plus, Minus, FlipHorizontal } from "lucide-react";
 import Image from "next/image";
 
@@ -9,47 +9,6 @@ const HarvestBrokerageWebsite = () => {
   const [formStatus, setFormStatus] = useState("");
   const [expandedService, setExpandedService] = useState(null);
   const [flippedCard, setFlippedCard] = useState(null);
-  const [counts, setCounts] = useState({ susan: 0, rick: 0, tori: 0 });
-  const hasAnimated = useRef(false);
-
-  // Animated counter effect
-  useEffect(() => {
-    const animateCounters = () => {
-      if (hasAnimated.current) return;
-
-      const susanTarget = 22;
-      const rickTarget = 30;
-      const toriTarget = 10;
-
-      const duration = 2000; // 2 seconds
-      const steps = 60;
-      const stepTime = duration / steps;
-
-      let currentStep = 0;
-
-      const timer = setInterval(() => {
-        currentStep++;
-        const progress = currentStep / steps;
-        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-
-        setCounts({
-          susan: Math.floor(susanTarget * easeOutQuart),
-          rick: Math.floor(rickTarget * easeOutQuart),
-          tori: Math.floor(toriTarget * easeOutQuart),
-        });
-
-        if (currentStep >= steps) {
-          setCounts({ susan: susanTarget, rick: rickTarget, tori: toriTarget });
-          hasAnimated.current = true;
-          clearInterval(timer);
-        }
-      }, stepTime);
-    };
-
-    // Trigger animation after component mounts
-    const timeout = setTimeout(animateCounters, 500);
-    return () => clearTimeout(timeout);
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,7 +17,7 @@ const HarvestBrokerageWebsite = () => {
     const formData = new FormData(e.target);
 
     try {
-      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      const response = await fetch("https://formspree.io/f/xrbkljlg", {
         method: "POST",
         body: formData,
         headers: {
@@ -116,9 +75,9 @@ const HarvestBrokerageWebsite = () => {
     {
       name: "Susan Keinat",
       title: "Co-Owner",
-      experience: `${counts.susan || 22}+ years experience`,
+      experience: "22+ years experience",
       description: "Established Harvest Brokerage in March 2003. Specializes in headquarter retailer calls, brand management, and promotional planning.",
-      phone: "(832)) 368-1234",
+      phone: "(832) 368-1234",
       email: "susan@harvestbrokerage.com",
       achievements: ["Founded Harvest Brokerage", "Former National Sales Manager", "Expert in Brand Management", "Retail Relationship Specialist"],
       previousRoles: ["Account Manager at Gordon Company Houston", "Account Executive at CrossMark Inc.", "Regional Sales Manager at Tony Chachere's Creole Foods"],
@@ -126,7 +85,7 @@ const HarvestBrokerageWebsite = () => {
     {
       name: "Rick Keinat",
       title: "Co-Owner",
-      experience: `${counts.rick || 30}+ years experience`,
+      experience: "30+ years experience",
       description: "Joined Harvest Brokerage in April 2010. Expert in distributor relationships and sales execution.",
       phone: "(832) 586-5562",
       email: "rick@harvestbrokerage.com",
@@ -136,9 +95,9 @@ const HarvestBrokerageWebsite = () => {
     {
       name: "Tori Clough",
       title: "Senior Account Manager",
-      experience: `${counts.tori || 10}+ years experience`,
+      experience: "10+ years experience",
       description: "Team member since 2014, specializing in natural and independent markets with strong retail execution skills.",
-      phone: "(832) 690-6707",
+      phone: "(281) 690-6707",
       email: "tori@harvestbrokerage.com",
       achievements: ["Natural Markets Specialist", "Independent Retail Expert", "In-Store Execution Pro", "Rising Industry Leader"],
       previousRoles: ["Sales Representative for Natural and Independent markets", "Progressive advancement through Account Manager to Senior Account Manager"],
