@@ -244,20 +244,15 @@ const HarvestBrokerageWebsite = () => {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="relative bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-700 text-white">
-        <div className="relative max-w-8xl mx-auto px-6 sm:px-8 lg:px-12 py-24">
-          <div className="text-center relative">
-            <div className="absolute inset-0 flex items-start justify-center pointer-events-none">
-              <Image
-                src="/wheat.svg"
-                alt=""
-                width={320}
-                height={240}
-                className="opacity-20 absolute -mt-20"
-                style={{ filter: "brightness(0) saturate(100%) invert(17%) sepia(18%) saturate(1804%) hue-rotate(127deg) brightness(95%) contrast(96%)" }}
-              />
-            </div>
+      <section id="home" className="relative bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-700 text-white overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image src="/wheatfield.jpg" alt="" fill className="object-cover opacity-20" sizes="100vw" priority />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/80 via-emerald-800/75 to-emerald-700/70"></div>
+        </div>
 
+        <div className="relative max-w-8xl mx-auto px-6 sm:px-8 lg:px-12 py-24 z-10">
+          <div className="text-center relative">
             <h1 className="text-5xl md:text-7xl heading-font font-black mb-4 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 bg-clip-text text-transparent drop-shadow-xl leading-tight relative z-10">
               Harvest Brokerage
             </h1>
