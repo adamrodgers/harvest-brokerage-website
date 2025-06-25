@@ -245,9 +245,12 @@ const HarvestBrokerageWebsite = () => {
 
       {/* Hero Section */}
       <section id="home" className="relative bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-700 text-white overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image with WebP/JPEG fallback */}
         <div className="absolute inset-0 z-0">
-          <Image src="/wheatfield.jpg" alt="" fill className="object-cover opacity-20" sizes="100vw" priority />
+          <picture>
+            <source srcSet="/wheatfield.webp" type="image/webp" />
+            <Image src="/wheatfield.jpg" alt="" fill className="object-cover opacity-20" sizes="100vw" priority />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/80 via-emerald-800/75 to-emerald-700/70"></div>
         </div>
 
