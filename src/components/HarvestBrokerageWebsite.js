@@ -354,7 +354,7 @@ const HarvestBrokerageWebsite = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-10">
-            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            {/* <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <h3 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center body-font">
                 <Award className="mr-3 text-amber-500" size={28} />
                 Major Retailers
@@ -366,7 +366,7 @@ const HarvestBrokerageWebsite = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <h3 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center body-font">
@@ -382,7 +382,7 @@ const HarvestBrokerageWebsite = () => {
               </div>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            {/* <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <h3 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center body-font">
                 <Target className="mr-3 text-amber-500" size={28} />
                 Independents
@@ -394,7 +394,7 @@ const HarvestBrokerageWebsite = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
