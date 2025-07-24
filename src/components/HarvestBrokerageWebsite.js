@@ -289,8 +289,7 @@ const HarvestBrokerageWebsite = () => {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <p className="text-lg text-stone-700 leading-relaxed body-font">
-                Harvest Brokerage is a leading food broker specializing in natural foods brokerage and the specialty trade grocery segment, offering manufacturers the &quot;back to basics&quot;
-                approach to selling their products.
+                Harvest Brokerage is a leading food broker specializing in natural foods brokerage and the specialty trade grocery segment.
               </p>
               <p className="text-lg text-stone-700 leading-relaxed body-font">
                 As an experienced food broker, we believe in building detail-oriented relationships from a solid foundation with retailers across the Southwest and Midwest regions. Our natural foods
