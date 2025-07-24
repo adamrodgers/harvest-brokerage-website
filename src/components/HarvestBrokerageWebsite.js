@@ -260,11 +260,6 @@ const HarvestBrokerageWebsite = () => {
               Harvest Brokerage
             </h1>
             <div className="w-32 h-1 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto mb-6"></div>
-            <h2 className="text-2xl md:text-3xl body-font font-light mb-6 text-stone-100 tracking-wide relative z-10">
-              {/* <span className="font-semibold text-amber-300 text-shadow-sm">Back to Basics</span> */}
-              <br />
-              <span className="text-stone-300 text-lg md:text-xl">Food Brokerage</span>
-            </h2>
             <p className="text-xl md:text-2xl mb-8 text-stone-200 max-w-3xl mx-auto body-font font-light leading-relaxed relative z-10">
               Food broker specializing in natural foods brokerage and specialty trade grocery segments across the Southwest and Midwest regions.
             </p>
