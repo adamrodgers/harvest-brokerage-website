@@ -80,7 +80,7 @@ const HarvestBrokerageWebsite = () => {
       phone: "(832) 368-1234",
       email: "susan@harvestbrokerage.com",
       achievements: ["Founded Harvest Brokerage", "Former National Sales Manager", "Expert in Brand Management", "Retail Relationship Specialist"],
-      previousRoles: ["Account Manager at Gordon Company Houston", "Account Executive at CrossMark Inc.", "Regional Sales Manager at Tony Chachere's Creole Foods"],
+      previousRoles: ["National Sales Manager at Satay", "Account Executive at CrossMark Inc.", "Regional Sales Manager at Tony Chachere's Creole Foods"],
     },
     {
       name: "Rick Keinat",
@@ -261,12 +261,12 @@ const HarvestBrokerageWebsite = () => {
             </h1>
             <div className="w-32 h-1 bg-gradient-to-r from-amber-400 to-amber-600 mx-auto mb-6"></div>
             <h2 className="text-2xl md:text-3xl body-font font-light mb-6 text-stone-100 tracking-wide relative z-10">
-              <span className="font-semibold text-amber-300 text-shadow-sm">Back to Basics</span>
+              {/* <span className="font-semibold text-amber-300 text-shadow-sm">Back to Basics</span> */}
               <br />
               <span className="text-stone-300 text-lg md:text-xl">Food Brokerage</span>
             </h2>
             <p className="text-xl md:text-2xl mb-8 text-stone-200 max-w-3xl mx-auto body-font font-light leading-relaxed relative z-10">
-              Texas food broker specializing in natural foods brokerage and specialty trade grocery segments across Texas and surrounding areas
+              Food broker specializing in natural foods brokerage and specialty trade grocery segments across the Southwest and Midwest regions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
               <a href="#about" className="bg-amber-500 hover:bg-amber-600 text-emerald-900 font-bold py-3 px-8 rounded-lg transition-colors duration-200 text-center">
@@ -294,11 +294,11 @@ const HarvestBrokerageWebsite = () => {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <p className="text-lg text-stone-700 leading-relaxed body-font">
-                Harvest Brokerage is a leading Texas food broker specializing in natural foods brokerage and the specialty trade grocery segment, offering manufacturers the &quot;back to basics&quot;
+                Harvest Brokerage is a leading food broker specializing in natural foods brokerage and the specialty trade grocery segment, offering manufacturers the &quot;back to basics&quot;
                 approach to selling their products.
               </p>
               <p className="text-lg text-stone-700 leading-relaxed body-font">
-                As an experienced Texas food broker, we believe in building detail-oriented relationships from a solid foundation with retailers across Texas and surrounding areas. Our natural foods
+                As an experienced food broker, we believe in building detail-oriented relationships from a solid foundation with retailers across the Southwest and Midwest regions. Our natural foods
                 brokerage expertise serves both emerging and established brands.
               </p>
 
@@ -355,7 +355,7 @@ const HarvestBrokerageWebsite = () => {
             <h2 className="text-5xl font-bold text-emerald-900 mb-6 body-font section-header">Market Coverage</h2>
             <div className="w-32 h-1 bg-amber-500 mx-auto mb-8"></div>
             <p className="text-xl text-stone-700 max-w-3xl mx-auto body-font font-light leading-relaxed">
-              Texas food broker serving major retailers and distributors across Texas, including Houston, Dallas, Austin, San Antonio, and surrounding areas
+              Food broker serving major retailers and distributors across the Southwest and Midwest regions.
             </p>
           </div>
 
@@ -534,14 +534,14 @@ const HarvestBrokerageWebsite = () => {
                   <Mail className="text-amber-300 mr-6" size={28} />
                   <div>
                     <p className="font-bold text-lg body-font">Email</p>
-                    <p className="text-stone-200 body-font">{defaultContact?.email}</p>
+                    <p className="text-stone-200 body-font">info@harvestbrokerage.com</p>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <MapPin className="text-amber-300 mr-6" size={28} />
                   <div>
                     <p className="font-bold text-lg body-font">Service Area</p>
-                    <p className="text-stone-200 body-font">Texas & Surrounding Areas</p>
+                    <p className="text-stone-200 body-font">Southwest and Midwest regions</p>
                   </div>
                 </div>
               </div>
