@@ -348,53 +348,33 @@ const HarvestBrokerageWebsite = () => {
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-emerald-900 mb-6 body-font section-header">Market Coverage</h2>
             <div className="w-32 h-1 bg-amber-500 mx-auto mb-8"></div>
-            <p className="text-xl text-stone-700 max-w-3xl mx-auto body-font font-light leading-relaxed">
-              Food broker serving major retailers and distributors across the Southwest and Midwest regions.
+          </div>
+
+          <div className="max-w-4xl mx-auto mb-16">
+            <p className="text-xl text-stone-700 body-font font-light leading-relaxed mb-8 text-center">
+              Harvest Brokerage proudly serves manufacturers across the Southwest and Midwest regions through our comprehensive network of retail partnerships and distribution channels. Our
+              established relationships span from major regional chains to specialty markets, ensuring your products reach the right customers through the most effective channels.
+            </p>
+            <p className="text-lg text-stone-600 body-font font-light leading-relaxed text-center">
+              Whether working with direct retail accounts or through distributor partnerships, we provide the personalized service and market expertise that drives results in the natural and specialty
+              trade grocery segment.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10">
-            {/* <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center body-font">
-                <Award className="mr-3 text-amber-500" size={28} />
-                Major Retailers
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white p-10 rounded-2xl shadow-xl">
+              <h3 className="text-3xl font-bold text-emerald-900 mb-8 flex items-center justify-center body-font">
+                <Handshake className="mr-3 text-amber-500" size={32} />
+                Key Distribution Partners
               </h3>
-              <div className="grid grid-cols-2 gap-3">
-                {retailers.slice(0, 8).map((retailer, index) => (
-                  <div key={index} className="text-stone-700 text-sm py-2 px-3 bg-stone-50 rounded-lg body-font font-medium">
-                    {retailer}
-                  </div>
-                ))}
-              </div>
-            </div> */}
-
-            <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center body-font">
-                <Handshake className="mr-3 text-amber-500" size={28} />
-                Distributors
-              </h3>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {["KeHE Distributors", "UNFI Distributors", "Chefs' Warehouse", "Jakes Finer Foods", "Grocers Supply / C&S"].map((distributor, index) => (
-                  <div key={index} className="text-stone-700 text-sm py-2 px-3 bg-stone-50 rounded-lg body-font font-medium">
+                  <div key={index} className="text-stone-700 text-lg py-3 px-4 bg-stone-50 rounded-lg body-font font-medium text-center hover:bg-amber-50 transition-colors duration-200">
                     {distributor}
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* <div className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-emerald-900 mb-6 flex items-center body-font">
-                <Target className="mr-3 text-amber-500" size={28} />
-                Independents
-              </h3>
-              <div className="space-y-3">
-                {["KeHE Independents", "UNFI Independents", "Rouses Supermarkets", "Akins and Chamberlins"].map((independent, index) => (
-                  <div key={index} className="text-stone-700 text-sm py-2 px-3 bg-stone-50 rounded-lg body-font font-medium">
-                    {independent}
-                  </div>
-                ))}
-              </div>
-            </div> */}
           </div>
         </div>
       </section>
