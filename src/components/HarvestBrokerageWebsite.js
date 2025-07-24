@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Menu, X, Phone, Mail, MapPin, ChevronDown, Users, Target, Award, Handshake, Plus, Minus, FlipHorizontal } from "lucide-react";
+import { Menu, X, Phone, Mail, MapPin, Users, Target, Award, Handshake, Plus, Minus, FlipHorizontal } from "lucide-react";
 import Image from "next/image";
 
 const HarvestBrokerageWebsite = () => {
@@ -49,7 +49,7 @@ const HarvestBrokerageWebsite = () => {
     },
     {
       title: "Ongoing Account Maintenance",
-      description: "Continuous relationship management with retail buyers, ensuring product availability, addressing issues promptly, and maintaining strong partnerships.",
+      description: "Continuous relationships with retail buyers and key decision makers, ensuring product availability, addressing issues promptly, and maintaining strong partnerships.",
       icon: <Users className="text-amber-500" size={24} />,
     },
     {
@@ -523,13 +523,6 @@ const HarvestBrokerageWebsite = () => {
             <div>
               <h3 className="text-3xl font-bold mb-8 body-font">Contact Information</h3>
               <div className="space-y-6">
-                <div className="flex items-center">
-                  <Phone className="text-amber-300 mr-6" size={28} />
-                  <div>
-                    <p className="font-bold text-lg body-font">Phone</p>
-                    <p className="text-stone-200 body-font">{defaultContact?.phone}</p>
-                  </div>
-                </div>
                 <div className="flex items-center">
                   <Mail className="text-amber-300 mr-6" size={28} />
                   <div>
